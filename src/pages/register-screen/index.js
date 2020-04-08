@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
-import { TextInput, TouchableOpacity, Text, Alert, KeyboardAvoidingView, ScrollView, View } from 'react-native'
+import { Alert, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+
 import styles from './styles'
 import InputMask from '../../utils/inputMask'
-import { useNavigation } from '@react-navigation/native'
+import Screen from '../../components/Screen'
+import FixView from '../../components/FixView'
+import TxtInput from '../../components/TxtInput'
+import TouchButton from '../../components/TouchButton'
+import Txt from '../../components/Txt'
 
 
 export default function RegisterScreen() {
-    let screen = null
     const navigation = useNavigation()
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
@@ -15,88 +20,84 @@ export default function RegisterScreen() {
     const [confirmSenha, setConfirmSenha] = useState('')
     const [submit, setSubmit] = useState(false)
 
+
+
     function register() {
         if(senha === confirmSenha){
             console.log(nome, email, cpf, senha, confirmSenha)
             setSubmit(true)
+            setTimeout(() => navigation.navigate('Home') , 3000)
         }else{
             Alert.alert('Ops',"Senhas não conferem")
         }
     }
 
-
-    const registerScreen = () => {
-        if(submit === false) {
-            return (
-            <ScrollView style={styles.container} contentContainerStyle={styles.containerChild}>
-                <KeyboardAvoidingView style={styles.registerContainer} behavior='padding' enabled={false}>
-                    <TextInput
+    if(!submit){
+        return (
+            <Screen>    
+                <FixView style={styles.registerContainer} >
+                    <TxtInput
                         value={nome} 
                         onChangeText={texto => setNome(texto)}
                         placeholder='Qual é seu nome?'
-                        placeholderTextColor='#7E7E7E'
                         style={styles.registerInput}
                     />
-
-                    <TextInput 
+    
+                    <TxtInput 
                         value={email}
                         onChangeText={texto => setEmail(texto)}
                         placeholder='Qual é seu melhor E-mail?'
-                        placeholderTextColor='#7E7E7E'
                         keyboardType='email-address'
                         style={styles.registerInput}
                     />
                     
-                    <TextInput 
+                    <TxtInput 
                         value={cpf}
                         onChangeText={texto => {setCpf(InputMask.cpf(texto))}}
                         placeholder='Qual é seu CPF?'
-                        placeholderTextColor='#7E7E7E'
                         keyboardType='numeric'
                         maxLength={14}
                         style={styles.registerInput}
                     />
-
-                    <TextInput 
+    
+                    <TxtInput 
                         value={senha}
                         onChangeText={texto => setSenha(texto)}
                         placeholder='Crie uma senha infálivel!'
-                        placeholderTextColor='#7E7E7E'
                         secureTextEntry={true}
                         style={styles.registerInput}
                     />
-
-                    <TextInput 
+    
+                    <TxtInput 
                         value={confirmSenha}
                         onChangeText={texto => setConfirmSenha(texto)}
                         placeholder='Confirme a senha por favor'
-                        placeholderTextColor='#7E7E7E'
                         secureTextEntry={true}
                         style={styles.registerInput}
                     />
-
-
-                    <TouchableOpacity style={styles.registerInputButton} onPress={register}>
-                        <Text style={styles.registerInputButtonText}>Registrar</Text>
-                    </TouchableOpacity>
-                </KeyboardAvoidingView>
-            </ScrollView>
-            )
-        }else{
-            return (
-            <View style={styles.container2}>
-                <View style={styles.msgContainer}>
-                    <Text style={styles.message}>Sucesso!</Text>
-                    <Text style={styles.message}>Cadastro concluído</Text>
-
-                    <TouchableOpacity style={styles.registerInputButton} onPress={() => setSubmit(false)}>
-                        <Text style={styles.registerInputButtonText}>Tentar Novamente</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            )
-        }
+    
+                    <TouchButton onPress={register} style={styles.registerInputButton}>REGISTRAR</TouchButton>
+    
+                </FixView>
+            </Screen>
+        )
+    }else if(true){
+        return(
+            <Screen>
+                <FixView style={[styles.registerContainer, {backgroundColor: '#6CB85D', justifyContent: 'center'}]}>
+                    <Txt style={{fontFamily: 'rubik-medium', color:'#fff', fontSize: 24}}>Sucesso!</Txt>
+                    <Txt style={{fontFamily: 'rubik-medium', color:'#fff', fontSize: 24}}>Cadastro Concluído</Txt>
+                </FixView>
+            </Screen>
+        )
+    }else{
+        return(
+            <Screen>
+                <FixView style={[styles.registerContainer, {backgroundColor: '#D03F36', justifyContent: 'center'}]}>
+                    <Txt style={{fontFamily: 'rubik-medium', color:'#fff', fontSize: 24}}>Ops!</Txt>
+                    <Txt style={{fontFamily: 'rubik-medium', color:'#fff', fontSize: 20, textAlign: 'center'}}>Parece que algo deu errado, tente novamente.</Txt>
+                </FixView>
+            </Screen>
+        )
     }
-
-    return registerScreen()
 }
