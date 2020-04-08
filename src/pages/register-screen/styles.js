@@ -3,8 +3,12 @@ import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        paddingTop: '20%',
+    },
+
+    containerChild: {
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     registerContainer: {
@@ -38,6 +42,28 @@ export default StyleSheet.create({
     },
 
     registerInputButtonText: {
+        fontFamily: 'rubik-medium',
+        fontSize: 24,
+        color: '#fff'
+    },
+
+    container2: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    msgContainer: {
+        width: '100%',
+        maxWidth: 300,
+        height: 580,
+        backgroundColor: '#6CB85D',
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    message: {
         fontFamily: 'rubik-medium',
         fontSize: 24,
         color: '#fff'
