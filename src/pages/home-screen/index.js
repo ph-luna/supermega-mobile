@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Image, View, Alert, BackHandler } from 'react-native'
 import { useBackHandler } from '@react-native-community/hooks'
+import { useNavigation } from '@react-navigation/native'
 
 import Screen from '../../components/Screen'
 import Txt from '../../components/Txt'
@@ -10,7 +11,8 @@ import TouchButton from '../../components/TouchButton'
 import TxtInput from '../../components/TxtInput'
 
 export default function HomeScreen(props){
-    const [next, setNext] = useState(false)  
+    const  navigation = useNavigation()
+    const [next, setNext] = useState(1)  
     const [content, setContent] = useState(
         <Screen>
             <View style={styles.stewardContainer}>
@@ -26,10 +28,13 @@ export default function HomeScreen(props){
         </Screen>
     )
 
-    useBackHandler(() => {
-        let exit = true
+    function navigateToProductList(){
+        navigation.navigate('ProductList')
+        setNext(0)
+    }
 
-        if(next){
+    useBackHandler(() => {
+        if(next === 2){
             setContent(
                 <Screen>
                     <View style={styles.stewardContainer}>
@@ -45,17 +50,16 @@ export default function HomeScreen(props){
                 </Screen>
             )
 
-            setNext(false)
+            setNext(1)
 
-            return exit
+            return true
 
-        }else{
+        }else if(next === 1){
             Alert.alert('SAIR', 'Tem certeza que quer sair?',[
                 {   
                     text: 'sim', 
                     onPress: () => {
                         BackHandler.exitApp()
-                        exit = false
                     },
                     style: 'default' 
                 },
@@ -67,8 +71,10 @@ export default function HomeScreen(props){
                 }
             ])
 
-            return exit
+            return true
         }
+        setNext(2)
+        return false
     })
 
     function optOneHandler(){
@@ -81,12 +87,12 @@ export default function HomeScreen(props){
             </View>
 
             <View style={styles.inputContainer}>
-                <TxtInput placeholder="> Insira aqui..." style={{ height: 50 }} />
+                <TxtInput placeholder="> Insira aqui..." style={{ height: 50 }} onSubmitEditing={() => navigateToProductList()} />
             </View>
         </Screen>
         )
 
-        setNext(true)
+        setNext(2)
     }
 
     function optTwoHandler() {
@@ -104,7 +110,7 @@ export default function HomeScreen(props){
             </Screen>
         )
 
-        setNext(true)
+        setNext(2)
     }
     
     return content

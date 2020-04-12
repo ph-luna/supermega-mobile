@@ -9,6 +9,7 @@ import Txt from '../../components/Txt'
 import styles from './styles'
 import logo from '../../../assets/icon.png'
 import Screen from '../../components/Screen'
+import FixView from '../../components/FixView'
 
 export default function loginScreen() {
     const navigation = useNavigation()
@@ -26,33 +27,37 @@ export default function loginScreen() {
 
     return (
         <Screen>
-            
-            <Image source={logo} />
+            <FixView>
 
-            <View style={styles.Container}>  
-                <TxtInput 
-                    value={username} 
-                    onChangeText={email => setUsername(email)} 
-                    placeholder="Insira seu E-mail" 
-                    style={styles.loginInput}
-                />
-                <TxtInput 
-                    value={password} 
-                    onChangeText={password => setPassword(password)} 
-                    placeholder="Insira sua senha" 
-                    secureTextEntry={true} 
-                    style={styles.loginInput}
-                />
-                
-                <TouchButton style={styles.buttonIniciar} onPress={loginPress}>
-                    INICIAR
-                </TouchButton>
+                <View style={styles.imgContainer}>
+                    <Image source={logo} style={styles.img} />
+                </View>
 
-                <TouchableOpacity style={styles.registerLinkContainer} onPress={navigateToRegister} >
-                    <Txt style={styles.registerLink}>Não possuo cadastro</Txt>
-                    <Feather name='log-in' size={18} color='#fff' />
-                </TouchableOpacity>
-            </View>
+                <View style={styles.Container}>  
+                    <TxtInput 
+                        value={username} 
+                        onChangeText={email => setUsername(email)} 
+                        placeholder="Insira seu E-mail" 
+                        style={styles.loginInput}
+                    />
+                    <TxtInput 
+                        value={password} 
+                        onChangeText={password => setPassword(password)} 
+                        placeholder="Insira sua senha" 
+                        secureTextEntry={true} 
+                        style={styles.loginInput}
+                    />
+                    
+                    <TouchButton style={styles.buttonIniciar} onPress={loginPress}>
+                        INICIAR
+                    </TouchButton>
+
+                    <TouchableOpacity style={styles.registerLinkContainer} onPress={navigateToRegister} >
+                        <Txt style={styles.registerLink}>Não possuo cadastro</Txt>
+                        <Feather name='log-in' size={18} color='#fff' />
+                    </TouchableOpacity>
+                </View>
+            </FixView>
         </Screen>
     )
 }

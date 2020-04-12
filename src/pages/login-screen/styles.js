@@ -13,14 +13,14 @@ export default StyleSheet.create({
     },
 
     loginInput: {
-        width: '100%',
-        maxWidth: 240,
+        width: 240,
+        maxWidth: '100%',
         height: 48,
     },
 
     buttonIniciar: {
-        width: '100%', 
-        maxWidth: 150,
+        width: 150, 
+        maxWidth: '100%',
         height: 50,
         marginTop: 20,
         marginBottom: 30,
@@ -37,5 +37,15 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         width: '100%',
+    },
+
+    img: {
+        width: 200,
+        height: 200,
+    },
+
+    imgContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 })
