@@ -3,8 +3,8 @@ import Color from '../../constants/colors'
 
 export default StyleSheet.create({
     registerContainer: {
-        width: 310,
-        maxWidth: '90%',
+        width: '90%',
+        maxWidth: 315,
         height: 580,
         backgroundColor: Color.primary,
         borderRadius: 20,
@@ -13,8 +13,8 @@ export default StyleSheet.create({
     },
 
     registerInput: {
-        width: 260,
-        maxWidth: '85%',
+        width: '85%',
+        maxWidth: 260,
         height: 50,
     },
 

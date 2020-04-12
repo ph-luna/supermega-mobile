@@ -40,5 +40,21 @@ export default StyleSheet.create({
     optionText: {
         fontSize: 18,
         fontFamily: Font.regular
+    },
+
+    inputContainer: {
+        width: '100%',
+        height: '30%',
+        justifyContent: 'center',
+        padding: 20,
+        backgroundColor: Color.secundary
+    },
+
+    inputContainer2: {
+        width: '100%',
+        height: '30%',
+        justifyContent: 'center',
+        padding: 20,
+        backgroundColor: Color.primary
     }
 })
